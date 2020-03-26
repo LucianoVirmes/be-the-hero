@@ -16,6 +16,6 @@ module.exports = {
             id, nome, email, whatsapp, cidade, estado
         })
 
-        return res.json(id);
+        return res.json({id});
     }
 }
