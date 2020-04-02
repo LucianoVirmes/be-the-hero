@@ -11,11 +11,16 @@ module.exports = {
     async criar(req, res) {
         const { nome, email, whatsapp, cidade, estado } = req.body;
         const id = generateUniqueId();
+        
+        try {
+            await connection('ongs').insert({
+                id, nome, email, whatsapp, cidade, estado
+            });
+        } catch (error) {
+            console.log(error);
+            return res.sendStatus(500);
+        }
 
-        await connection('ongs').insert({
-            id, nome, email, whatsapp, cidade, estado
-        })
-
-        return res.json({id});
+        return res.json({ id });
     }
 }
